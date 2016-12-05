@@ -36,16 +36,16 @@ int initExcel(char *path,char *name)
 int getSharedStrings(char*** p,int *num)
 {
 	xmlDocPtr doc;           
-    xmlNodePtr curNode;               
+    	xmlNodePtr curNode;               
 	int size;
-    const char *szDocName="./xlsx_txt_tmp/xl/sharedStrings.xml";
+    	const char *szDocName="./xlsx_txt_tmp/xl/sharedStrings.xml";
 	doc = xmlReadFile(szDocName,"utf8",XML_PARSE_RECOVER); 
 	if (NULL == doc) 
-    {  
-       fprintf(stderr,"Document parse failed. ");     
-       return -1; 
-    } 
-    curNode = xmlDocGetRootElement(doc);
+    	{  
+       		fprintf(stderr,"Document parse failed. ");     
+       		return -1; 
+    	} 
+    	curNode = xmlDocGetRootElement(doc);
 	xmlChar* szAttr = xmlGetProp(curNode,BAD_CAST "uniqueCount");
 	size=atoi((char*)szAttr);
 	xmlFree(szAttr);
@@ -86,20 +86,20 @@ int main(int argc, char* argv[])
 		return -1;
 	
 	xmlDocPtr doc;           
-    xmlNodePtr curNode;               
-    const char *szDocName="./xlsx_txt_tmp/xl/worksheets/sheet1.xml";
+    	xmlNodePtr curNode;               
+   	const char *szDocName="./xlsx_txt_tmp/xl/worksheets/sheet1.xml";
 	FILE *fp;
 	int size=0;
 	char **sharedStrings;
 	getSharedStrings(&sharedStrings,&size);
 	doc = xmlReadFile(szDocName,"GB2312",XML_PARSE_RECOVER); 
-    if (NULL == doc) 
-    {  
-       fprintf(stderr,"Document parse failed. ");     
-       return -1; 
-    } 
+	if (NULL == doc) 
+    	{  
+       		fprintf(stderr,"Document parse failed. ");     
+       		return -1; 
+    	} 
 	
-    curNode = xmlDocGetRootElement(doc); 
+    	curNode = xmlDocGetRootElement(doc); 
 	curNode=curNode->xmlChildrenNode;
 	while(1)
 	{
@@ -155,7 +155,7 @@ int main(int argc, char* argv[])
 		fclose(fp);
 		curNode=curNode->next;
 	}  
-    xmlFreeDoc(doc);
+   	xmlFreeDoc(doc);
 	freeData(&sharedStrings,&size);
 	free(sharedStrings);
 	sharedStrings=NULL;
